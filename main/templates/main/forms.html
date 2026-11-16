@@ -1,0 +1,31 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="board-head">
+  <span><b>방명록 수정 ✎</b> <span class="count">No.{{ post.idx }}</span></span>
+</div>
+
+<ul class="errors" id="errors"></ul>
+
+<!-- 제출은 guestbook.js에서 PATCH로 보냄 -->
+<form class="write edit" id="edit-form" data-url="{% url 'article' pk=post.idx %}">
+  <div class="write-row">
+    <div class="fields">
+      <input type="text" name="name" placeholder="이름" maxlength="20" value="{{ form.name.value|default_if_none:'' }}">
+      <textarea name="content" placeholder="내용">{{ form.content.value|default_if_none:'' }}</textarea>
+    </div>
+  </div>
+  <div class="write-opts">
+    <div class="pick">미니미 :
+      {% for value, label in form.fields.minimi.choices %}
+      <label><input type="radio" name="minimi" value="{{ value }}"{% if form.minimi.value|stringformat:'s' == value|stringformat:'s' %} checked{% endif %}><img src="{% static 'main/img/' %}minimi-{{ value }}.png" alt="{{ label }}"></label>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="btns">
+    <button type="submit" class="mini-btn">수정 완료</button>
+    <a href="{% url 'article' pk=post.idx %}" class="mini-btn">취소</a>
+  </div>
+</form>
+{% endblock %}

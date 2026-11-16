@@ -1,0 +1,73 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- 방명록 머리: 제목, 깅이 인사말, 폴라로이드 -->
+<div class="gb-top">
+  <img class="gb-title" src="{% static 'main/img/gb-title.png' %}" alt="Guest Book">
+  <div class="gb-hello">
+    <img class="gb-owner" src="{% static 'main/img/owner.png' %}" alt="">
+    <div class="bubble">깅이 홈피에 놀러와 주셔서 감사해요~<br>방명록 남기구 가셈 (^-^)/ ♡</div>
+  </div>
+  <div class="polaroid p1"><img src="{% static 'main/img/polaroid-1.jpg' %}" alt=""><img class="tape" src="{% static 'main/img/st-tape.png' %}" alt=""></div>
+  <div class="polaroid p2"><img src="{% static 'main/img/polaroid-2.jpg' %}" alt=""></div>
+  <img class="st st-camera" src="{% static 'main/img/st-camera.png' %}" alt="">
+  <img class="st st-heart" src="{% static 'main/img/st-heart.png' %}" alt="">
+</div>
+
+<div class="board-head">
+  <span><img class="st-inline" src="{% static 'main/img/st-letter.png' %}" alt=""> <b>방명록</b> 전체 <span class="count">({{ guestbook_count }})</span></span>
+  <span class="date" style="color:#999;font-size:11px;">최신순 ▼</span>
+</div>
+
+{% if form.errors %}
+<ul class="errors">
+  {% for field in form %}{% for error in field.errors %}
+  <li>※ {{ error }}</li>
+  {% endfor %}{% endfor %}
+</ul>
+{% endif %}
+
+<!-- 방명록 쓰기 -->
+<form class="write" method="post" action="{% url 'create' %}">
+  {% csrf_token %}
+  <img class="st st-ribbon" src="{% static 'main/img/st-ribbon.png' %}" alt="">
+  <div class="write-row">
+    <div class="fields">
+      <input type="text" name="name" placeholder="이름" maxlength="20" value="{{ form.name.value|default_if_none:'' }}">
+      <textarea name="content" placeholder="깅이 홈피 놀러왔으면 방명록 남기구 가삼~ ^^*">{{ form.content.value|default_if_none:'' }}</textarea>
+    </div>
+    <button type="submit" class="ok">확인</button>
+  </div>
+  <div class="write-opts">
+    <div class="pick">미니미 :
+      {% for value, label in form.fields.minimi.choices %}
+      <label><input type="radio" name="minimi" value="{{ value }}"{% if form.minimi.value|stringformat:'s' == value|stringformat:'s' %} checked{% endif %}><img src="{% static 'main/img/' %}minimi-{{ value }}.png" alt="{{ label }}"></label>
+      {% endfor %}
+    </div>
+    <label><input type="checkbox" name="is_secret"{% if form.is_secret.value %} checked{% endif %}> 비밀로 하기</label>
+  </div>
+</form>
+
+<!-- 방명록 목록 -->
+{% for post in posts %}
+<div class="entry{% if post.is_secret %} secret{% endif %}">
+  <img class="thumb" src="{% static 'main/img/' %}minimi-{{ post.minimi }}.png" alt="">
+  <div class="entry-main">
+    <div class="entry-head">
+      <span><a href="{% url 'article' pk=post.idx %}" class="no">No.{{ post.idx }}</a> <span class="who">{{ post.name }}</span> <img class="ico" src="{% static 'main/img/ico-home.png' %}" alt=""> <span class="date">({{ post.created_at|date:"Y.m.d H:i" }})</span></span>
+      <span class="actions">{% if post.is_secret %}<a href="#" onclick="toggleSecret('{% url 'article' pk=post.idx %}', false); return false;">공개로 하기</a>{% else %}<a href="#" onclick="toggleSecret('{% url 'article' pk=post.idx %}', true); return false;">비밀로 하기</a>{% endif %} | <a href="{% url 'edit' pk=post.idx %}">수정</a> | <a href="#" onclick="deletePost('{% url 'article' pk=post.idx %}', '{% url 'index' %}'); return false;">삭제</a></span>
+    </div>
+    {% if post.is_secret %}
+    <p class="secret-note"><img class="ico" src="{% static 'main/img/ico-lock.png' %}" alt=""> 비밀글입니다.</p>
+    {% else %}
+    <p>{{ post.content|linebreaksbr }}</p>
+    {% endif %}
+  </div>
+</div>
+{% empty %}
+<div class="empty">아직 방명록이 없어요 OTL... 첫 방명록의 주인공이 되어주세요 ★</div>
+{% endfor %}
+
+<div class="gb-end"><img src="{% static 'main/img/st-bunny.png' %}" alt=""> ~ 또 놀러와 ♡ ~ <img src="{% static 'main/img/st-strawberry.png' %}" alt=""></div>
+{% endblock %}

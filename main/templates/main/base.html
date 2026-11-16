@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<meta name="csrf-token" content="{{ csrf_token }}">
+<title>깅이의 미니홈피 ♡</title>
+<link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+</head>
+<body>
+
+<div class="ie">
+  <div class="ie-title">
+    <span class="ie-icon">e</span>
+    <span class="name">깅이의 미니홈피 ♡ - Microsoft Internet Explorer</span>
+    <span class="ie-btn">_</span><span class="ie-btn">□</span><span class="ie-btn close">X</span>
+  </div>
+
+  <div class="ie-body">
+    <div class="skin">
+
+      <div class="lace">
+        <div class="frame">
+          <div class="frame-top">
+            <div class="counter">TODAY <b>11</b> &nbsp;|&nbsp; TOTAL 1004</div>
+            <div class="title">깅이의 미니홈피 ♡<a href="#" class="mini-btn">수정</a></div>
+            <span class="home-set"><img class="ico" src="{% static 'main/img/ico-home.png' %}" alt=""> 홈설정</span>
+            <span class="url">http://www.cyworld.com/gingi_0101</span>
+          </div>
+
+          <div class="cols">
+            <!-- 왼쪽: 프로필 -->
+            <div class="box profile">
+              <div class="today-is">
+                TODAY IS..
+                <select>
+                  <option>^ㅁ^ 행복</option>
+                  <option>⊙.⊙ 멍~</option>
+                  <option>ㅠ_ㅠ 우울</option>
+                  <option>-_-zZ 졸림</option>
+                </select>
+              </div>
+
+              <div class="photo">
+                <div class="photo-box">
+                  <img src="{% static 'main/img/selfie.jpg' %}" alt="깅이 셀카">
+                </div>
+                <img class="lace-photo" src="{% static 'main/img/photo-frame.png' %}" alt="">
+              </div>
+
+              <p class="intro">★ <span class="pink">깅이's</span> 미니홈피 ★
+ㄴr는 ㄱr끔 눈물을 흘린ㄷr...
+ㄱr끔은 ㄴr도 웃고 싶ㄷr ^-^</p>
+
+              <div class="profile-bottom">
+                <div class="edit-links"><span>▶EDIT &nbsp;▶HISTORY</span><span>▼▲</span></div>
+                <div class="owner">가영 <small>(♀)</small><span class="ilchon">일촌+</span></div>
+                <div class="email">gingi_0101@cyworld.com</div>
+                <select class="wave">
+                  <option>::: 파도타기 :::</option>
+                  <option>다은♡</option>
+                  <option>지훈™</option>
+                  <option>민수 ㅋㅋ</option>
+                  <option>소희★</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- 가운데: 방명록 -->
+            <div class="box board">
+              {% block content %}{% endblock %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 메뉴 탭 (방명록만 만들었음) -->
+      <nav class="tabs">
+        <a href="#" onclick="alert('아직 공사중이에요~ (__)'); return false;">홈</a>
+        <a href="#" onclick="alert('아직 공사중이에요~ (__)'); return false;">프로필</a>
+        <a href="#" onclick="alert('아직 공사중이에요~ (__)'); return false;">다이어리</a>
+        <a href="#" onclick="alert('아직 공사중이에요~ (__)'); return false;">사진첩</a>
+        <a href="{% url 'index' %}" class="on">방명록</a>
+        <a href="#" onclick="alert('아직 공사중이에요~ (__)'); return false;">관리</a>
+      </nav>
+
+      <!-- 오른쪽 사이드 -->
+      <div class="side">
+        <div class="box">
+          <div class="side-tit">일촌 파도타기 <span>더보기</span></div>
+          <div class="friends">
+            <img src="{% static 'main/img/minimi-2.png' %}" alt=""><img src="{% static 'main/img/minimi-4.png' %}" alt=""><img src="{% static 'main/img/minimi-1.png' %}" alt="">
+          </div>
+          <a href="#" class="invite">일촌 초대 ▸</a>
+        </div>
+
+        <div class="box">
+          <div class="stat">
+            <span>방명록 <b style="color:#f26b1d">{{ guestbook_count }}</b> <img class="ico-n" src="{% static 'main/img/ico-new.png' %}" alt="N"></span>
+            <span>사진첩 128</span>
+            <span>다이어리 12</span>
+            <span>일촌 77</span>
+          </div>
+          <div class="active-bar">액티브 <i></i></div>
+        </div>
+
+        <div class="box player">
+          <div class="side-tit"><span style="color:#f26b1d;font-weight:bold"><img class="ico" src="{% static 'main/img/ico-note.png' %}" alt=""> 음악</span><span>BGM 1/3</span></div>
+          <div class="song"><span>1. 프리스타일 - Y &nbsp; 2. 버즈 - 겁쟁이 &nbsp; 3. SG워너비 - Timeless</span></div>
+          <div class="ctrl"><span><img class="ico" src="{% static 'main/img/ico-play.png' %}" alt=""> <img class="ico" src="{% static 'main/img/ico-pause.png' %}" alt=""> <img class="ico" src="{% static 'main/img/ico-stop.png' %}" alt=""></span><span class="list">LIST</span></div>
+        </div>
+
+        <div class="box">
+          <div class="skin-link"><span>무료스킨 <img class="ico-n" src="{% static 'main/img/ico-new.png' %}" alt="N"></span><span>추천BGM ▾</span></div>
+        </div>
+
+        <div class="banner">
+          <img src="{% static 'main/img/banner.png' %}" alt="">
+          <span>깅이네 놀러와~♡<br>일촌 환영</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="ie-status"><span>🌐 완료</span><span>인터넷</span></div>
+</div>
+
+<script src="{% static 'main/js/guestbook.js' %}"></script>
+</body>
+</html>

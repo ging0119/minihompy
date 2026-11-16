@@ -1,0 +1,68 @@
+[
+  {
+    "model": "main.post",
+    "pk": 1,
+    "fields": {
+      "name": "지훈™",
+      "content": "(__)(--)(__) 꾸벅 홈피 구경 잘 하구 가요~ 담에 또 올게 ^^",
+      "minimi": 3,
+      "is_secret": false,
+      "created_at": "2026-11-14T20:05:00+09:00"
+    }
+  },
+  {
+    "model": "main.post",
+    "pk": 2,
+    "fields": {
+      "name": "다은♡",
+      "content": "숙제 다 했어?? 나 아직 OTL... 내일 같이 하자 ㅠ_ㅠ",
+      "minimi": 2,
+      "is_secret": false,
+      "created_at": "2026-11-14T22:11:00+09:00"
+    }
+  },
+  {
+    "model": "main.post",
+    "pk": 3,
+    "fields": {
+      "name": "소희★",
+      "content": "일촌 신청 받아줘 ㅇㅅㅇ 일촌명은 '가영♡소희' 어때?? 빨랑 수락해 ㅡㅡ+",
+      "minimi": 4,
+      "is_secret": false,
+      "created_at": "2026-11-15T18:20:00+09:00"
+    }
+  },
+  {
+    "model": "main.post",
+    "pk": 4,
+    "fields": {
+      "name": "민수 ㅋㅋ",
+      "content": "ㅋㅋㅋ 홈피 스킨 바꿨넹 d(^0^)b 도토리 몇 개 썼냐 ㅋㅋㅋ 즐~",
+      "minimi": 1,
+      "is_secret": false,
+      "created_at": "2026-11-15T23:47:00+09:00"
+    }
+  },
+  {
+    "model": "main.post",
+    "pk": 5,
+    "fields": {
+      "name": "지훈™",
+      "content": "가영아 할 말 있는데... 내일 학교 끝나고 잠깐 볼 수 있어?? -_-;;",
+      "minimi": 3,
+      "is_secret": true,
+      "created_at": "2026-11-16T19:02:00+09:00"
+    }
+  },
+  {
+    "model": "main.post",
+    "pk": 6,
+    "fields": {
+      "name": "다은♡",
+      "content": "가영아~~ 사진 퍼가요~♡ 너무 이쁘당 ㅠ_ㅠ 담에 나두 찍어줘!! 약속 ㅋㅋㅋ",
+      "minimi": 2,
+      "is_secret": false,
+      "created_at": "2026-11-16T21:30:00+09:00"
+    }
+  }
+]

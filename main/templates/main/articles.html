@@ -1,0 +1,40 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+{% if post %}
+<div class="board-head">
+  <span><b>방명록</b> 전체 <span class="count">({{ guestbook_count }})</span></span>
+</div>
+
+<div class="entry big{% if post.is_secret %} secret{% endif %}">
+  <img class="thumb" src="{% static 'main/img/' %}minimi-{{ post.minimi }}.png" alt="">
+  <div class="entry-main">
+    <div class="entry-head">
+      <span><span class="no">No.{{ post.idx }}</span> <span class="who">{{ post.name }}</span> <img class="ico" src="{% static 'main/img/ico-home.png' %}" alt=""> <span class="date">({{ post.created_at|date:"Y.m.d H:i" }})</span></span>
+    </div>
+    {% if post.is_secret %}
+    <p class="secret-note"><img class="ico" src="{% static 'main/img/ico-lock.png' %}" alt=""> 비밀글입니다.</p>
+    {% else %}
+    <p>{{ post.content|linebreaksbr }}</p>
+    {% endif %}
+  </div>
+</div>
+
+<div class="btns">
+  <a href="{% url 'index' %}" class="mini-btn">목록으로</a>
+  {% if post.is_secret %}
+  <a href="#" class="mini-btn" onclick="toggleSecret('{% url 'article' pk=post.idx %}', false); return false;">공개로 하기</a>
+  {% else %}
+  <a href="#" class="mini-btn" onclick="toggleSecret('{% url 'article' pk=post.idx %}', true); return false;">비밀로 하기</a>
+  {% endif %}
+  <a href="{% url 'edit' pk=post.idx %}" class="mini-btn">수정</a>
+  <a href="#" class="mini-btn" onclick="deletePost('{% url 'article' pk=post.idx %}', '{% url 'index' %}'); return false;">삭제</a>
+</div>
+{% else %}
+<div class="gone">
+  <p>삭제된 방명록입니다 OTL</p>
+  <a href="{% url 'index' %}" class="mini-btn">돌아가기</a>
+</div>
+{% endif %}
+{% endblock %}
